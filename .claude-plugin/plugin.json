@@ -1,0 +1,23 @@
+{
+  "name": "my-epk",
+  "version": "1.0.0",
+  "description": "Make an electronic press kit (EPK) for a DJ, producer, singer or band in chat. MY EPK drafts the kit, pulls streaming profiles and releases, writes the bio, and hands the artist one link to add photos and publish at my-epk.com/<handle>.",
+  "author": {
+    "name": "MY EPK",
+    "email": "shawn@my-epk.com",
+    "url": "https://my-epk.com"
+  },
+  "homepage": "https://my-epk.com",
+  "repository": "https://github.com/skelly1313/my-epk-claude-plugin",
+  "license": "MIT",
+  "keywords": [
+    "epk",
+    "press kit",
+    "dj",
+    "music",
+    "artist",
+    "booking"
+  ],
+  "privacyPolicyUrl": "https://my-epk.com/privacy",
+  "icon": ".claude-plugin/icon.png"
+}

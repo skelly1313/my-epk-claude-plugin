@@ -1,0 +1,15 @@
+{
+  "name": "my-epk",
+  "owner": {
+    "name": "MY EPK",
+    "email": "shawn@my-epk.com"
+  },
+  "plugins": [
+    {
+      "name": "my-epk",
+      "source": "./",
+      "description": "Make an electronic press kit (EPK) for a DJ, producer, singer or band in chat, hosted at my-epk.com/<handle>."
+    }
+  ],
+  "description": "MY EPK: electronic press kits for DJs and music artists, built in chat."
+}

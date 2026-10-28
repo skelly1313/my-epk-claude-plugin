@@ -1,0 +1,1 @@
+{"handle":"{{input.handle}}","publicUrl":"https://my-epk.com/{{input.handle}}","note":"Live at that address once the artist publishes.","completeness":80,"missing":["photos (artist adds on the claimUrl; add_photos for direct image links)"],"claimUrl":"https://my-epk.com/claim/kt_eval_7Q2xR","status":"draft, not yet claimed: the artist opens claimUrl to finish and publish"}

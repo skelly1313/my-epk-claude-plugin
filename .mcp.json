@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "my-epk": { "type": "http", "url": "https://my-epk.com/mcp" }
+  }
+}

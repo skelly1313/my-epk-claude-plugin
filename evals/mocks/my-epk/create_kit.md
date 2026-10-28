@@ -1,0 +1,1 @@
+{"kitToken":"kt_eval_7Q2xR","kit":{"displayName":"{{input.displayName}}"},"completeness":15,"missing":["bio","links","releases","stats","handle","photos (artist adds on the claimUrl; add_photos for direct image links)"],"photoCount":0,"claimUrl":"https://my-epk.com/claim/kt_eval_7Q2xR","status":"draft, not yet claimed: the artist opens claimUrl to finish and publish"}

@@ -1,0 +1,672 @@
+{
+  "tools": [
+    {
+      "name": "create_kit",
+      "title": "Start a press kit",
+      "description": "Use this when a DJ, producer, singer, rapper, band or any music artist wants an EPK (electronic press kit) or a booking page made in chat. Start a new MY EPK press-kit draft for an artist. Returns a kitToken (pass it to every later call), the claimUrl the artist opens to finish and publish, and the kit state. Everything but displayName is optional and can be added later with update_kit.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "description": "Artist or act name as it should appear on the page (max 80)."
+          },
+          "artistTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "What they do.",
+              "enum": [
+                "DJ",
+                "PRODUCER",
+                "SINGER",
+                "RAPPER",
+                "SONGWRITER",
+                "BAND",
+                "DUO",
+                "INSTRUMENTALIST",
+                "OTHER"
+              ]
+            },
+            "description": "Up to 4."
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "A genre, 1-40 characters."
+            },
+            "description": "Up to 12 genres, e.g. [\"House\", \"Disco\"]."
+          },
+          "location": {
+            "type": "string",
+            "description": "City (and state/country), e.g. \"Brooklyn, NY\"."
+          },
+          "tagline": {
+            "type": "string",
+            "description": "One line under 60 characters."
+          },
+          "bio": {
+            "type": "string",
+            "description": "Third-person bio, 60-120 words. Can be added later."
+          },
+          "bookingEmail": {
+            "type": "string",
+            "description": "Booking contact email."
+          }
+        },
+        "required": [
+          "displayName"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Start a press kit",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "get_kit",
+      "title": "Read the kit",
+      "description": "Use this when you need to see what the artist's press kit already has, or what is missing, before the next step. Read the current state of a press kit: every field, completeness (0-100), what is still missing, and the claimUrl.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kitToken": {
+            "type": "string",
+            "description": "The kitToken returned by create_kit."
+          }
+        },
+        "required": [
+          "kitToken"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Read the kit",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "update_kit",
+      "title": "Update the kit",
+      "description": "Use this when the artist gives or changes anything for their EPK: bio, genres, booking contact, tech rider, stats, links, releases, press quotes or the shows promoters and venues look for. Set or change any fields of the kit. Scalar fields replace; the lists links, releases, quotes and highlights are appended to (duplicates skipped) unless replaceLists is true. Omit anything you are not changing. Enum values: theme NOIR|PAPER|NEON, coverStyle FULL|SPLIT|MINIMAL, galleryStyle GRID|MASONRY|STRIP, linkStyle BUTTONS|LOGOS, releaseStyle LIST|TILES|PLAYERS.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kitToken": {
+            "type": "string",
+            "description": "The kitToken returned by create_kit."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Artist name (max 80)."
+          },
+          "artistTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Type.",
+              "enum": [
+                "DJ",
+                "PRODUCER",
+                "SINGER",
+                "RAPPER",
+                "SONGWRITER",
+                "BAND",
+                "DUO",
+                "INSTRUMENTALIST",
+                "OTHER"
+              ]
+            },
+            "description": "Replaces the list. Up to 4."
+          },
+          "pronouns": {
+            "type": "string",
+            "description": "e.g. she/her (max 30)."
+          },
+          "tagline": {
+            "type": "string",
+            "description": "One line, max 160; under 60 reads best."
+          },
+          "bio": {
+            "type": "string",
+            "description": "The one bio, third person, 60-120 words (max 6000 chars)."
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Genre"
+            },
+            "description": "Replaces the list. Up to 12."
+          },
+          "location": {
+            "type": "string",
+            "description": "City, e.g. \"Brooklyn, NY\"."
+          },
+          "country": {
+            "type": "string",
+            "description": "Country."
+          },
+          "yearsActive": {
+            "type": "string",
+            "description": "e.g. \"since 2018\"."
+          },
+          "label": {
+            "type": "string",
+            "description": "Record label."
+          },
+          "agency": {
+            "type": "string",
+            "description": "Booking agency."
+          },
+          "theme": {
+            "type": "string",
+            "description": "Page theme.",
+            "enum": [
+              "NOIR",
+              "PAPER",
+              "NEON"
+            ]
+          },
+          "accentColor": {
+            "type": "string",
+            "description": "Hex color like #D2601A."
+          },
+          "coverStyle": {
+            "type": "string",
+            "description": "Cover layout.",
+            "enum": [
+              "FULL",
+              "SPLIT",
+              "MINIMAL"
+            ]
+          },
+          "galleryStyle": {
+            "type": "string",
+            "description": "Photo gallery layout.",
+            "enum": [
+              "GRID",
+              "MASONRY",
+              "STRIP"
+            ]
+          },
+          "linkStyle": {
+            "type": "string",
+            "description": "How links show.",
+            "enum": [
+              "BUTTONS",
+              "LOGOS"
+            ]
+          },
+          "releaseStyle": {
+            "type": "string",
+            "description": "How releases show.",
+            "enum": [
+              "LIST",
+              "TILES",
+              "PLAYERS"
+            ]
+          },
+          "releasesTitle": {
+            "type": "string",
+            "description": "Heading of the music section, e.g. \"Music\" or \"Mixes\" (max 30)."
+          },
+          "bookingName": {
+            "type": "string",
+            "description": "Booking contact name."
+          },
+          "bookingEmail": {
+            "type": "string",
+            "description": "Booking email."
+          },
+          "bookingPhone": {
+            "type": "string",
+            "description": "Booking phone."
+          },
+          "availableFor": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "e.g. Club shows"
+            },
+            "description": "Replaces the list. Up to 10."
+          },
+          "techRider": {
+            "type": "string",
+            "description": "Tech rider text."
+          },
+          "stats": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "description": "The number, e.g. \"120\" or \"48k\"."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "What it counts, e.g. \"shows played\"."
+                }
+              },
+              "required": [
+                "value",
+                "label"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Replaces the list. Up to 4 value/label pairs."
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "description": "Platform; leave out to detect from the URL.",
+                  "enum": [
+                    "SPOTIFY",
+                    "APPLE_MUSIC",
+                    "SOUNDCLOUD",
+                    "BEATPORT",
+                    "BANDCAMP",
+                    "MIXCLOUD",
+                    "YOUTUBE",
+                    "DEEZER",
+                    "TIDAL",
+                    "AMAZON_MUSIC",
+                    "AUDIOMACK",
+                    "INSTAGRAM",
+                    "TIKTOK",
+                    "THREADS",
+                    "FACEBOOK",
+                    "X",
+                    "SNAPCHAT",
+                    "TWITCH",
+                    "DISCORD",
+                    "RESIDENT_ADVISOR",
+                    "BANDSINTOWN",
+                    "LINKTREE",
+                    "WEBSITE",
+                    "OTHER"
+                  ]
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Full https:// URL."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Display label, e.g. @handle (max 60)."
+                },
+                "followers": {
+                  "type": "integer",
+                  "description": "Follower count if known."
+                }
+              },
+              "required": [
+                "url"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Appended unless replaceLists. Up to 20 in total."
+          },
+          "releases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "Release title (required)."
+                },
+                "kind": {
+                  "type": "string",
+                  "description": "Single, EP, Album, Remix, Mix..."
+                },
+                "label": {
+                  "type": "string",
+                  "description": "Label."
+                },
+                "releasedOn": {
+                  "type": "string",
+                  "description": "Date or year, e.g. \"2026-03\" or \"2025\"."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Link to the release."
+                },
+                "artworkUrl": {
+                  "type": "string",
+                  "description": "Artwork image URL."
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Appended unless replaceLists. Up to 30 in total."
+          },
+          "quotes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "quote": {
+                  "type": "string",
+                  "description": "The quote (max 600)."
+                },
+                "source": {
+                  "type": "string",
+                  "description": "Publication or person."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "Link to the piece."
+                }
+              },
+              "required": [
+                "quote"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Press quotes. Appended unless replaceLists. Up to 12."
+          },
+          "highlights": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "e.g. \"Opened for Chris Lake\" (required)."
+                },
+                "kind": {
+                  "type": "string",
+                  "description": "Type.",
+                  "enum": [
+                    "show",
+                    "press",
+                    "release",
+                    "milestone",
+                    "award",
+                    "other"
+                  ]
+                },
+                "place": {
+                  "type": "string",
+                  "description": "Venue, city or outlet."
+                },
+                "happenedOn": {
+                  "type": "string",
+                  "description": "Date or year."
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "One line of detail (max 300)."
+                }
+              },
+              "required": [
+                "title"
+              ],
+              "additionalProperties": false
+            },
+            "description": "Appended unless replaceLists. Up to 20."
+          },
+          "sectionOrder": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Section key.",
+              "enum": [
+                "about",
+                "listen",
+                "photos",
+                "releases",
+                "press",
+                "highlights",
+                "social",
+                "booking"
+              ]
+            },
+            "description": "Order of sections on the page."
+          },
+          "hiddenSections": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Section key.",
+              "enum": [
+                "about",
+                "listen",
+                "photos",
+                "releases",
+                "press",
+                "highlights",
+                "social",
+                "booking"
+              ]
+            },
+            "description": "Sections to hide."
+          },
+          "replaceLists": {
+            "type": "boolean",
+            "description": "true replaces links/releases/quotes/highlights instead of appending."
+          }
+        },
+        "required": [
+          "kitToken"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Update the kit",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "find_profiles",
+      "title": "Find an artist's profiles",
+      "description": "Use this when a DJ or artist tells you their name and you need their streaming profiles for the press kit. Search Spotify, Apple Music, Mixcloud and Deezer for an artist by name. Returns candidate profiles (name, URL, image, followers, genres) to confirm with the artist before adding them as links with update_kit or importing releases with import_catalog.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Artist name."
+          },
+          "platform": {
+            "type": "string",
+            "description": "Limit to one platform.",
+            "enum": [
+              "SPOTIFY",
+              "APPLE_MUSIC",
+              "MIXCLOUD",
+              "DEEZER"
+            ]
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Find profiles",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "resolve_link",
+      "title": "Look up a link",
+      "description": "Use this when the artist pastes a link or an @handle (SoundCloud, Instagram, TikTok, Resident Advisor or anything else) for their EPK. Turn any pasted link into a clean link: platform, canonical URL, display name, avatar and follower count where the platform exposes it. Expands share-sheet short links. For an @handle, send its profile URL on the platform the artist named: instagram.com/<handle>, tiktok.com/@<handle> or x.com/<handle>. Use before adding links so they carry the right platform and label.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "A URL, e.g. soundcloud.com/novarae or instagram.com/novarae (a bare @handle needs its platform's URL)."
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Look up a link",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "import_catalog",
+      "title": "Import releases from a profile",
+      "description": "Use this when a DJ, producer or band wants their releases on the press kit without typing them one by one. Import an artist's releases (title, date, artwork, link) from a Spotify, Apple Music, Deezer or Mixcloud artist profile URL into the kit, and add that profile as a link. Skips releases already in the kit.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kitToken": {
+            "type": "string",
+            "description": "The kitToken returned by create_kit."
+          },
+          "profileUrl": {
+            "type": "string",
+            "description": "Artist profile URL on Spotify, Apple Music, Deezer or Mixcloud."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max releases to import this call (default 12, max 30)."
+          }
+        },
+        "required": [
+          "kitToken",
+          "profileUrl"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Import releases",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "add_photos",
+      "title": "Add photos from URLs",
+      "description": "Use this when the artist has press photos online to put on their EPK. Attach photos to the kit from direct public image URLs (JPEG, PNG or WebP, under 8 MB each; up to 6 per call). Photos are added after any already there, and the kit's first photo is its cover, so an existing cover is never replaced. Instagram pages and gallery pages are not direct image links; for camera-roll photos the artist uses the claimUrl on their phone.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kitToken": {
+            "type": "string",
+            "description": "The kitToken returned by create_kit."
+          },
+          "urls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Direct image URL."
+            },
+            "description": "1-6 image URLs."
+          },
+          "captions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Caption"
+            },
+            "description": "Optional captions, same order as urls."
+          }
+        },
+        "required": [
+          "kitToken",
+          "urls"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Add photos",
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": true
+      }
+    },
+    {
+      "name": "set_handle",
+      "title": "Choose the link",
+      "description": "Use this when the artist picks the link promoters and venues will open for bookings. Choose the public link my-epk.com/<handle>: 3-30 lowercase letters, numbers, hyphens or underscores. Returns alternatives if it is taken. The page only goes live when the artist publishes.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kitToken": {
+            "type": "string",
+            "description": "The kitToken returned by create_kit."
+          },
+          "handle": {
+            "type": "string",
+            "description": "Desired handle, e.g. novarae."
+          }
+        },
+        "required": [
+          "kitToken",
+          "handle"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Choose the link",
+        "readOnlyHint": false,
+        "destructiveHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "publish_kit",
+      "title": "Check readiness and how to publish",
+      "description": "Use this when the artist wants their press kit live or asks how to send it to promoters and venues. Publishing is done by the artist on the site, not from chat: this reports whether the kit is ready (name, handle, completeness), what still blocks it, and the claimUrl to open on the phone to add photos, sign in and tap Publish.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "kitToken": {
+            "type": "string",
+            "description": "The kitToken returned by create_kit."
+          }
+        },
+        "required": [
+          "kitToken"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "title": "Check readiness to publish",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ]
+}
